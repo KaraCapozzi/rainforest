@@ -1,0 +1,17 @@
+<h1>Welcome</h1>
+
+<div>
+  <%=yield%>
+  <%@products%>
+  <p><%@products.each do |product|%>
+    <ul>
+    <h2><%=product.name%></h2>
+    <li><%=product.description%></li>
+    <li><%=product.price_in_cents%></li>
+</ul>
+<%end%>
+<!-- <link -->
+
+</p>
+
+</div>
