@@ -15,6 +15,8 @@ def edit
 end
 
 def show
+  @product = Product.find(params[:id])
+  @review = @product.reviews.new
 end
 
 def update
