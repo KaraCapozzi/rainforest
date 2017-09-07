@@ -24,6 +24,7 @@ def new
 end
 
 def edit
+  @product = Product.new
 end
 
 def show
