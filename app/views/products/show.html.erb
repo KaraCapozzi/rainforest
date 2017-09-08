@@ -5,3 +5,14 @@
 
 <%=link_to("Edit", "/products/#{params[:id]}/edit") %>
 <%=link_to("Delete", "/products/#{@product.id}", method: :delete, data: {confirm: "This is a beautiful peace of jewelery. Are you sure you want to let it go?"})%>
+
+<h2>Reviews</h2>
+<ul>
+  <% @product.reviews.all.each do |review| %>
+  <li>
+    <p>
+     On <%= review.created_at %>,
+   </p>
+   <p><%= review.review %></p>
+   <%end%>
+ </ul>
