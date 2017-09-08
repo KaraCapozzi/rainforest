@@ -1,13 +1,12 @@
 class ReviewsController < ApplicationController
 
   def create
-    @review = Review.new(review: params[:review][:review][:id])
-
-    @review.name = params[:review][:name]
+    @product = Product.find(params[:product_id])
+    @review = @product.reviews.new
     @review.review = params[:review][:review]
 
     if @review.save
-      redirect_to '/products/:id'
+      redirect_to "/products/#{@product.id}"
     else
       render :new
     end
@@ -21,18 +20,21 @@ class ReviewsController < ApplicationController
   def edit
     @product = Product.find(params[:product_id])
     @review = Review.find(params[:id])
+
   end
 
   def update
+    p params
     @product = Product.find(params[:product_id])
+
 
     @review = Review.find(params[:id])
 
     @review.name = params[:review][:name]
-    @product.review = params[:review][:review]
+    @review.review = params[:review][:review]
 
     if @review.save
-        redirect_to "/products/#{params[:id]}"
+        redirect_to "/products/#{params[:product_id]}}"
       else
         render :edit
       end
@@ -40,7 +42,10 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    @review.destroy
+    if @review.destroy
+      redirect_to "/products/#{params[:product_id]}}"
+      flash[:notice] = "Review deleted"
+    end
   end
 
 
